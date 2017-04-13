@@ -1,0 +1,9 @@
+extends layout.pug
+block content
+    a(href='/') Главная
+    form(action='/signin', method='post')
+        input#email(name='email', value='', type='text')
+        |  
+        input#password(name='password', value='', type='password')
+        |  
+        button(type=submit) Войти

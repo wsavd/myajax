@@ -1,0 +1,9 @@
+extends layout.pug
+block content
+    a(href='/') Главная
+    form(action='/signup', method='post')
+        input#email(name='email', value='', type='text')
+        |  
+        input#password(name='password', value='', type='text')
+        |  
+        button(type=submit) Зарегистрироваться
