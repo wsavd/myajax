@@ -30,3 +30,10 @@ a:hover {
 .account{
     padding: 0 10px;
 }
+.column{
+    background: white;
+}
+.flex-containerS{
+    display:flex;
+    flex-direction:column;
+}
