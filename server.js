@@ -45,6 +45,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 var Board = require('./app/models/board');
+var BoardId = require('./app/models/boardId');
+
 app.get('/board/:id', function(req,res) {
     Board.findOne({_id: req.params.id}, function(err, results) {
       //res.send("work");
@@ -52,7 +54,21 @@ app.get('/board/:id', function(req,res) {
     res.render('board');
   });
 });
-
+//косячок
+app.get('/boardid', function(req,res) {
+    BoardId.find(function(err, results) {
+      //res.send("work");
+      //res.json(results)
+        res.json(results);
+  });
+});
+app.put('/boardid', function(req, res) {
+    //var query = {_id: [req.params.id]};
+	var body = req.body;
+    BoardId.findOneAndUpdate({_id: '58f079828cb8ea390cc29392'}, req.body, function (err, place) {
+        res.json(place);
+    });
+});
 
 // launch ======================================================================
 app.listen(port);

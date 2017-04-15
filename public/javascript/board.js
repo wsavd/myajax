@@ -1,9 +1,21 @@
 $(document).ready(function () {
-    //выводим колонки доски
-    //id доски до запроса
-    $.ajax({
-            url: 'http://localhost:3001/board/58ee7bf57cb76c2e6477caca/columns',
+    //считываем айдишник кликнутой доски
+        var boardId;
+        $.ajax({
+            url: 'http://localhost:8080/boardid',
+            contentType: 'application/json',
+            async: false,
+            
+            success: function(json) {
+            boardId = json[0].boardId
+            }
+        });
+        //alert(boardId);
+        var url = "http://localhost:3078/board/" + boardId + "/columns";
+        $.ajax({
+            url: url,
             type: 'GET',
+            async:false,
             contentType: 'application/json',
             success: function(result) {
                 console.log(result);
@@ -13,13 +25,13 @@ $(document).ready(function () {
             },
             error: function (error) {
                 console.log(error);
-        }
-    });
-    //выводим 
-    $.ajax({
-            url: 'http://localhost:3001/column/58ef287a0ea7ee2e40aec2bf/cards',
+            }
+        });
+        $.ajax({
+            url: 'http://localhost:3078/column/' + boardId + '/cards',
             type: 'GET',
             contentType: 'application/json',
+            async: false,
             success: function(result) {
                 console.log(result);
                 $.each(result, function(index){
@@ -30,5 +42,4 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
-
 });
